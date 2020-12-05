@@ -13,7 +13,7 @@ public class Main {
         State firstBState = new FirstB();
         State secondAState = new SecondA();
         State secondBState = new SecondB();
-        State finalState = new ThirdConsecuiveEvent();
+        State finalState = new ThirdConsecutiveEvent();
 
         finalState.setTransitions(evtA, finalState);
         finalState.setTransitions(evtB, finalState);
