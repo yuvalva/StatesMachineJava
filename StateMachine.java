@@ -5,11 +5,12 @@ public class StateMachine {
         currState = initialState;
     }
 
-    void handleEvent(MachineEvent evt)
+    public void handleEvent(MachineEvent evt)
     {
         State newState = currState.getNextState(evt);
 
         if (currState != null && currState != newState)
-            currState =  newState;
+            currState = newState;
     }
+
 }

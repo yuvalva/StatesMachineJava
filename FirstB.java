@@ -1,4 +1,5 @@
 public class FirstB implements State<Character> {
+    @Override
     public State getNextState(MachineEvent evt)
     {
         if(evt.data.equals('A'))
@@ -12,6 +13,7 @@ public class FirstB implements State<Character> {
         else
             return null;
     }
+    @Override
     public void doLogic(){};
 }
 

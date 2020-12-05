@@ -1,4 +1,5 @@
 public class SecondB implements State<Character> {
+    @Override
     public State getNextState(MachineEvent evt)
     {
         if(evt.data.equals('A'))
@@ -14,5 +15,6 @@ public class SecondB implements State<Character> {
             return null;
         }
     }
+    @Override
     public void doLogic(){};
 }
