@@ -7,6 +7,7 @@ public class StateMachine {
         currState = initialState;
     }
 
+    // handle events sent by the client
     public synchronized void handleEvent(MachineEvent evt) throws StateNotFoundException
     {
         State newState = currState.getNextState(evt);
@@ -17,9 +18,8 @@ public class StateMachine {
         {
             currState.doBeforeLeave();
             newState.doOnEnter();
-        }
-        if (newState != null && currState != newState)
             currState = newState;
+        }
     }
 
 }
