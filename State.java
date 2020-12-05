@@ -1,4 +1,20 @@
-public interface State<T> {
-    public State getNextState(MachineEvent<T> evt);
-    public void doLogic();
+import java.util.HashMap;
+import java.util.Map;
+
+public abstract class State<T> {
+    Map<MachineEvent, State> statesTransitionsMap = new HashMap();
+
+    // Optional logic the client can override when entering or leave a certain state
+    void doOnEnter(){};
+    void doBeforeLeave(){};
+    // Api for the client to set a concrete state transitions
+    public void setTransitions(MachineEvent evt, State newState)
+    {
+        statesTransitionsMap.put(evt, newState);
+    }
+    public State getNextState(MachineEvent evt)
+    {
+        return statesTransitionsMap.get(evt);
+    }
+
 }

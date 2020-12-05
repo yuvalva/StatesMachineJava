@@ -1,15 +1,6 @@
-public class ThirdConsecuiveEvent implements State<Character>{
-    ThirdConsecuiveEvent()
-    {
-        doLogic();
-    }
+public class ThirdConsecuiveEvent extends State<Character>{
     @Override
-    public State getNextState(MachineEvent evt)
-    {
-        return this;
-    }
-    @Override
-    public void doLogic(){
-        System.out.println("Indicated three consecutive events of the same type");
+    public void doOnEnter(){
+        System.out.println("The same event happened three consecutive times");
     };
 }

@@ -9,7 +9,12 @@ public class StateMachine {
     {
         State newState = currState.getNextState(evt);
 
-        if (currState != null && currState != newState)
+        if(newState != currState)
+        {
+            currState.doBeforeLeave();
+            newState.doOnEnter();
+        }
+        if (newState != null && currState != newState)
             currState = newState;
     }
 

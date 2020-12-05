@@ -3,15 +3,42 @@ public class Main {
         MachineEvent<Character> evtA = new MachineEvent<>('A') ;
         MachineEvent<Character> evtB = new MachineEvent<>('B');
 
-        State initState = new InitialState();
-        StateMachine threeConsecutiveEvents = new StateMachine(initState);
-        threeConsecutiveEvents.handleEvent(evtA);
-        threeConsecutiveEvents.handleEvent(evtA);
-        threeConsecutiveEvents.handleEvent(evtB);
-        threeConsecutiveEvents.handleEvent(evtA);
-        threeConsecutiveEvents.handleEvent(evtB);
-        threeConsecutiveEvents.handleEvent(evtB);
-        threeConsecutiveEvents.handleEvent(evtB);
-        threeConsecutiveEvents.handleEvent(evtA);
+        State initialState = new InitialState();
+        State firstAState = new FirstA();
+        State firstBState = new FirstB();
+        State secondAState = new SecondA();
+        State secondBState = new SecondB();
+        State finalState = new ThirdConsecuiveEvent();
+
+        finalState.setTransitions(evtA, finalState);
+        finalState.setTransitions(evtB, finalState);
+
+        secondAState.setTransitions(evtA, finalState);
+        secondAState.setTransitions(evtB, firstBState);
+
+        secondBState.setTransitions(evtA, firstAState);
+        secondBState.setTransitions(evtB, finalState);
+
+        firstAState.setTransitions(evtA, secondAState);
+        firstAState.setTransitions(evtB, firstBState);
+
+        firstBState.setTransitions(evtA, firstAState);
+        firstBState.setTransitions(evtB, secondBState);
+
+        initialState.setTransitions(evtA, firstAState);
+        initialState.setTransitions(evtB, firstBState);
+
+        StateMachine threeConsecutiveEventsMachine = new StateMachine(initialState);
+
+        threeConsecutiveEventsMachine.handleEvent(evtA);
+        threeConsecutiveEventsMachine.handleEvent(evtA);
+        threeConsecutiveEventsMachine.handleEvent(evtB);
+        threeConsecutiveEventsMachine.handleEvent(evtA);
+        threeConsecutiveEventsMachine.handleEvent(evtB);
+        threeConsecutiveEventsMachine.handleEvent(evtB);
+        threeConsecutiveEventsMachine.handleEvent(evtB);
+        threeConsecutiveEventsMachine.handleEvent(evtA);
+
+        //String name = initState.getClass().getName();
     }
 }

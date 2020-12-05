@@ -1,20 +1,10 @@
-public class SecondB implements State<Character> {
+public class SecondB extends State<Character> {
     @Override
-    public State getNextState(MachineEvent evt)
-    {
-        if(evt.data.equals('A'))
-        {
-            return new FirstA();
-        }
-        else if(evt.data.equals('B'))
-        {
-            return  new ThirdConsecuiveEvent();
-        }
-        else
-        {
-            return null;
-        }
-    }
+    public void doOnEnter(){
+        System.out.println("Saw BB");
+    };
     @Override
-    public void doLogic(){};
+    public void doBeforeLeave(){
+        System.out.println("Leaving BB state");
+    };
 }
