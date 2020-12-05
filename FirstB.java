@@ -1,3 +1,5 @@
+import statemachine.State;
+
 public class FirstB extends State<Character> {
     @Override
     public void doOnEnter(){

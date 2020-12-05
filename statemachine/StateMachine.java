@@ -1,7 +1,9 @@
+package statemachine;
+
 public class StateMachine {
     State currState;
 
-    StateMachine(State initialState){
+    public StateMachine(State initialState){
         currState = initialState;
     }
 

@@ -1,3 +1,7 @@
+import statemachine.MachineEvent;
+import statemachine.State;
+import statemachine.StateMachine;
+import statemachine.StateNotFoundException;
 
 public class Main {
     public static void main(String[] args) {
