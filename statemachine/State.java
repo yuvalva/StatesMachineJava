@@ -14,7 +14,7 @@ public abstract class State<T> {
     {
         statesTransitionsMap.put(evt, newState);
     }
-    public State getNextState(MachineEvent evt)
+    State getNextState(MachineEvent evt)
     {
         return statesTransitionsMap.get(evt);
     }

@@ -7,7 +7,7 @@ public class StateMachine {
         currState = initialState;
     }
 
-    public void handleEvent(MachineEvent evt) throws StateNotFoundException
+    public synchronized void handleEvent(MachineEvent evt) throws StateNotFoundException
     {
         State newState = currState.getNextState(evt);
         if(newState == null)
