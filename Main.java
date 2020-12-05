@@ -1,3 +1,4 @@
+
 public class Main {
     public static void main(String[] args) {
         MachineEvent<Character> evtA = new MachineEvent<>('A') ;
@@ -30,14 +31,20 @@ public class Main {
 
         StateMachine threeConsecutiveEventsMachine = new StateMachine(initialState);
 
-        threeConsecutiveEventsMachine.handleEvent(evtA);
-        threeConsecutiveEventsMachine.handleEvent(evtA);
-        threeConsecutiveEventsMachine.handleEvent(evtB);
-        threeConsecutiveEventsMachine.handleEvent(evtA);
-        threeConsecutiveEventsMachine.handleEvent(evtB);
-        threeConsecutiveEventsMachine.handleEvent(evtB);
-        threeConsecutiveEventsMachine.handleEvent(evtB);
-        threeConsecutiveEventsMachine.handleEvent(evtA);
+        try {
+            threeConsecutiveEventsMachine.handleEvent(evtA);
+            threeConsecutiveEventsMachine.handleEvent(evtA);
+            threeConsecutiveEventsMachine.handleEvent(evtB);
+            threeConsecutiveEventsMachine.handleEvent(evtA);
+            threeConsecutiveEventsMachine.handleEvent(evtB);
+            threeConsecutiveEventsMachine.handleEvent(evtB);
+            threeConsecutiveEventsMachine.handleEvent(evtB);
+            threeConsecutiveEventsMachine.handleEvent(evtA);
+        }
+        catch (StateNotFoundException ex)
+        {
+            System.out.println(ex.getMessage());
+        }
 
         //String name = initState.getClass().getName();
     }

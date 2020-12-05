@@ -5,9 +5,11 @@ public class StateMachine {
         currState = initialState;
     }
 
-    public void handleEvent(MachineEvent evt)
+    public void handleEvent(MachineEvent evt) throws StateNotFoundException
     {
         State newState = currState.getNextState(evt);
+        if(newState == null)
+            throw new StateNotFoundException(currState, evt);
 
         if(newState != currState)
         {
