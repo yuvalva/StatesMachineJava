@@ -17,8 +17,8 @@ public class StateMachine implements Serializable {
 
         if(newState != currState)
         {
-            currState.doBeforeLeave();
-            newState.doOnEnter();
+            currState.doBeforeLeave(evt);
+            newState.doOnEnter(evt);
             currState = newState;
         }
     }
