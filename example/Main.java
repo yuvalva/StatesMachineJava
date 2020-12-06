@@ -11,8 +11,8 @@ public class Main {
 
         handleEventsTest(threeConsecutiveEventsMachine);
 
-        MachineEvent<Character> evtA = new MachineEvent<>('A');
-        MachineEvent<Character> evtB = new MachineEvent<>('B');
+        MachineEvent evtA = new MachineEvent('A');
+        MachineEvent evtB = new MachineEvent('B');
 
         // Save machine state
         try {
@@ -31,8 +31,8 @@ public class Main {
 
     static StateMachine createThreeConsecutiveEventsMachine() {
 
-        MachineEvent<Character> evtA = new MachineEvent<>('A');
-        MachineEvent<Character> evtB = new MachineEvent<>('B');
+        MachineEvent evtA = new MachineEvent('A');
+        MachineEvent evtB = new MachineEvent('B');
 
         State initialState = new InitialState();
         State firstAState = new FirstA();
@@ -68,8 +68,8 @@ public class Main {
         if(machine == null)
             return;
 
-        MachineEvent<Character> evtA = new MachineEvent<>('A');
-        MachineEvent<Character> evtB = new MachineEvent<>('B');
+        MachineEvent evtA = new MachineEvent('A');
+        MachineEvent evtB = new MachineEvent('B');
 
         try {
             machine.handleEvent(evtA);

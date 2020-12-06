@@ -2,11 +2,11 @@ package statemachine;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class MachineEvent<T> implements Serializable {
-    private T data;
-    public MachineEvent(T obj) { this.data = obj;  }
+public class MachineEvent implements Serializable {
+    private Object data;
+    public MachineEvent(Object evtData) { this.data = evtData;  }
 
-    public T getData() {return data;}
+    public Object getData() {return data;}
     // Overriding both equals and hashCode enables to compare two states by their data
     @Override
     public boolean equals(Object o) {
