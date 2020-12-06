@@ -1,6 +1,6 @@
 import statemachine.State;
 
-public class FirstA extends State<Character> {
+public class FirstA extends State {
     @Override
     public void doOnEnter(){
         System.out.println("Saw A");
