@@ -4,7 +4,12 @@ import java.util.Objects;
 
 public class MachineEvent implements Serializable {
     private Object data;
-    public MachineEvent(Object evtData) { this.data = evtData;  }
+    private String name;
+
+    public MachineEvent(Object evtData, String eventName) {
+        this.data = evtData;
+        this.name = eventName;
+    }
 
     public Object getData() {return data;}
     // Overriding both equals and hashCode enables to compare two states by their data

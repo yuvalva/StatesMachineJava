@@ -1,9 +1,12 @@
 package statemachine;
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class StateMachine implements Serializable {
-    State currState;
-    static final String MACHINE_SAVED = "Machine state was successfully saved to: ";
+    private State currState;
+    private Map<String, State> nameToStateMap = new HashMap();
+    static private final String MACHINE_SAVED = "Machine state was successfully saved to: ";
 
     public StateMachine(State initialState){
         currState = initialState;
