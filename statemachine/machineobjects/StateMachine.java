@@ -34,7 +34,7 @@ public class StateMachine implements Serializable {
         }
     }
 
-    // mapping each stata name to the state to recognize a state by its name
+    // mapping each state name to the state to recognize a state by its name
     // prevents saving many states references in the state class Map
     public State addState(State state)
     {
