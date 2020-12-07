@@ -1,4 +1,4 @@
-package statemachine;
+package statemachine.machineobjects;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -6,13 +6,14 @@ public class MachineEvent implements Serializable {
     private Object data;
     private String name;
 
-    public MachineEvent(Object evtData, String eventName) {
-        this.data = evtData;
+    public MachineEvent(String eventName, Object eventData) {
+        this.data = eventData;
         this.name = eventName;
     }
 
     public Object getData() {return data;}
-    // Overriding both equals and hashCode enables to compare two states by their data
+    public String getName() {return name;}
+
     @Override
     public boolean equals(Object o) {
         if (o == this) {
@@ -24,7 +25,7 @@ public class MachineEvent implements Serializable {
         }
 
         MachineEvent otherEvt = (MachineEvent)o;
-        return otherEvt.data.equals(this.data);
+        return otherEvt.getName().equals(this.getName());
     }
 
     @Override
