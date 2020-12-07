@@ -26,6 +26,7 @@ public class Main {
             // handle some more events
             newMachine.handleEvent(evtA);
             newMachine.handleEvent(evtA);
+            newMachine.handleEvent(evtB);
         } catch (StateNotFoundException ex) {
             System.out.println(ex.getMessage());
         } catch (EmptyStateNameException ex) {
