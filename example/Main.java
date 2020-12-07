@@ -1,6 +1,9 @@
 package example;
 
-import statemachine.*;
+import statemachine.exceptions.StateNotFoundException;
+import statemachine.machineobjects.MachineEvent;
+import statemachine.machineobjects.State;
+import statemachine.machineobjects.StateMachine;
 
 import java.io.*;
 
@@ -11,8 +14,8 @@ public class Main {
 
         handleEventsTest(threeConsecutiveEventsMachine);
 
-        MachineEvent evtA = new MachineEvent('A', "A");
-        MachineEvent evtB = new MachineEvent('B', "B");
+        MachineEvent evtA = new MachineEvent("A", 'A');
+        MachineEvent evtB = new MachineEvent("B", 'B');
 
         // Save machine state
         try {
@@ -21,7 +24,7 @@ public class Main {
             StateMachine newMachine = StateMachine.restoreMachine(filename);
             // handle some more events
             newMachine.handleEvent(evtA);
-            newMachine.handleEvent(evtB);
+            newMachine.handleEvent(evtA);
         } catch (IOException ex) {
             System.out.println("IOException occurred" + System.lineSeparator() + ex.getMessage());
         } catch (ClassNotFoundException ex) {
@@ -31,15 +34,27 @@ public class Main {
 
     static StateMachine createThreeConsecutiveEventsMachine() {
 
-        MachineEvent evtA = new MachineEvent('A', "A");
-        MachineEvent evtB = new MachineEvent('B', "B");
+        MachineEvent evtA = new MachineEvent("A",'A');
+        MachineEvent evtB = new MachineEvent("B",'B');
 
+        // create the states
         State initialState = new InitialState();
+        initialState.setName("no input");
+
         State firstAState = new FirstA();
+        firstAState.setName("A");
+
         State firstBState = new FirstB();
+        firstBState.setName(("B"));
+
         State secondAState = new SecondA();
+        secondAState.setName("AA");
+
         State secondBState = new SecondB();
+        secondBState.setName("BB");
+
         State finalState = new ThirdConsecutiveEvent();
+        finalState.setName("end state");
 
         finalState.setTransitions(evtA, finalState);
         finalState.setTransitions(evtB, finalState);
@@ -59,7 +74,15 @@ public class Main {
         initialState.setTransitions(evtA, firstAState);
         initialState.setTransitions(evtB, firstBState);
 
+        // create state and add all of its states
         StateMachine threeConsecutiveEventsMachine = new StateMachine(initialState);
+        threeConsecutiveEventsMachine.addState(initialState);
+        threeConsecutiveEventsMachine.addState(firstAState);
+        threeConsecutiveEventsMachine.addState(firstBState);
+        threeConsecutiveEventsMachine.addState(secondAState);
+        threeConsecutiveEventsMachine.addState(secondBState);
+        threeConsecutiveEventsMachine.addState(finalState);
+
         return threeConsecutiveEventsMachine;
     }
 
@@ -68,16 +91,16 @@ public class Main {
         if(machine == null)
             return;
 
-        MachineEvent evtA = new MachineEvent('A', "A");
-        MachineEvent evtB = new MachineEvent('B', "B");
+        MachineEvent evtA = new MachineEvent("A",'A');
+        MachineEvent evtB = new MachineEvent("B",'B');
 
         try {
             machine.handleEvent(evtA);
-            machine.handleEvent(evtA);
             machine.handleEvent(evtB);
             machine.handleEvent(evtA);
             machine.handleEvent(evtB);
             machine.handleEvent(evtB);
+            machine.handleEvent(evtA);
             machine.handleEvent(evtB);
             machine.handleEvent(evtA);
         } catch (StateNotFoundException ex) {

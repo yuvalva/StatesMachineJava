@@ -1,22 +1,30 @@
-package statemachine;
+package statemachine.machineobjects;
+import statemachine.exceptions.EmptyStateNameException;
+import statemachine.exceptions.StateNotFoundException;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
 public class StateMachine implements Serializable {
     private State currState;
-    private Map<String, State> nameToStateMap = new HashMap();
+    private Map<String, State> stateNameToStateMap = new HashMap();
     static private final String MACHINE_SAVED = "Machine state was successfully saved to: ";
 
     public StateMachine(State initialState){
+
         currState = initialState;
     }
 
-    public synchronized void handleEvent(MachineEvent evt) throws StateNotFoundException
+    public synchronized void handleEvent(MachineEvent evt) throws StateNotFoundException, EmptyStateNameException
     {
-        State newState = currState.getNextState(evt);
+        if(evt.getName() == null || evt.getName().isEmpty())
+            throw new EmptyStateNameException();
+
+        String newStateName = currState.getNextStateName(evt);
+        State newState = stateNameToStateMap.get(newStateName);
+
         if(newState == null)
-            throw new StateNotFoundException(currState, evt);
+            throw new StateNotFoundException(currState.getName(), evt.getName());
 
         if(newState != currState)
         {
@@ -24,6 +32,18 @@ public class StateMachine implements Serializable {
             newState.doOnEnter(evt);
             currState = newState;
         }
+    }
+
+    // mapping each stata name to the state to recognize a state by its name
+    // prevents saving many states references in the state class Map
+    public State addState(State state)
+    {
+
+        if(state == null || state.getName() == null || state.getName().isEmpty())
+            return null;
+
+        stateNameToStateMap.put(state.getName(), state);
+        return state;
     }
 
     public void saveMachineStateToFile(String filePath) throws IOException
@@ -48,5 +68,4 @@ public class StateMachine implements Serializable {
         fileStream.close();
         return restoredMachine;
     }
-
 }

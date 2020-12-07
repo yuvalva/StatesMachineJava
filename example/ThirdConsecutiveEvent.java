@@ -1,7 +1,6 @@
 package example;
-
-import statemachine.MachineEvent;
-import statemachine.State;
+import statemachine.machineobjects.MachineEvent;
+import statemachine.machineobjects.State;
 
 public class ThirdConsecutiveEvent extends State {
     @Override

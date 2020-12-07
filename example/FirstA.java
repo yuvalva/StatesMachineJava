@@ -1,16 +1,5 @@
 package example;
+import statemachine.machineobjects.State;
 
-import statemachine.MachineEvent;
-import statemachine.State;
-
-public class FirstA extends State {
-    @Override
-    public void doOnEnter(MachineEvent evt){
-        System.out.println("Saw A");
-    };
-    @Override
-    public void doBeforeLeave(MachineEvent evt){
-        System.out.println("Leaving A state");
-    };
-}
+public class FirstA extends State { }
 
