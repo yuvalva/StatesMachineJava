@@ -1,5 +1,6 @@
 package example;
 
+import statemachine.exceptions.EmptyStateNameException;
 import statemachine.exceptions.StateNotFoundException;
 import statemachine.machineobjects.MachineEvent;
 import statemachine.machineobjects.State;
@@ -25,10 +26,14 @@ public class Main {
             // handle some more events
             newMachine.handleEvent(evtA);
             newMachine.handleEvent(evtA);
+        } catch (StateNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        } catch (EmptyStateNameException ex) {
+            System.out.println(ex.getMessage());
         } catch (IOException ex) {
-            System.out.println("IOException occurred" + System.lineSeparator() + ex.getMessage());
+            System.out.println(ex.getMessage());
         } catch (ClassNotFoundException ex) {
-            System.out.println("ClassNotFoundException occurred" + System.lineSeparator() + ex.getMessage());
+            System.out.println(ex.getMessage());
         }
     }
 
@@ -104,6 +109,8 @@ public class Main {
             machine.handleEvent(evtB);
             machine.handleEvent(evtA);
         } catch (StateNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        }catch (EmptyStateNameException ex) {
             System.out.println(ex.getMessage());
         }
     }

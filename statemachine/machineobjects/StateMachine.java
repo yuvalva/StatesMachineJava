@@ -11,7 +11,6 @@ public class StateMachine implements Serializable {
     static private final String MACHINE_SAVED = "Machine state was successfully saved to: ";
 
     public StateMachine(State initialState){
-
         currState = initialState;
     }
 
@@ -21,6 +20,10 @@ public class StateMachine implements Serializable {
             throw new EmptyStateNameException();
 
         String newStateName = currState.getNextStateName(evt);
+
+        if(newStateName == null || newStateName.isEmpty())
+            throw new EmptyStateNameException();
+
         State newState = stateNameToStateMap.get(newStateName);
 
         if(newState == null)
